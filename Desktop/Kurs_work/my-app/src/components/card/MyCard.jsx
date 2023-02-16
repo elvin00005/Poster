@@ -38,4 +38,8 @@ const MyCard = (props) => {
         </Button>
         <Button onClick={toggleExpanded} size="small">
           Learn More
-        </Button>
+         </Button>
+      </CardActions>
+    </Card>
+  );
+};
