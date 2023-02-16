@@ -1,31 +1,43 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-} from '@mui/material';
+import { Card, CardMedia, CardContent, CardActions, Typography, Button } from '@mui/material';
+import { useState } from 'react';
 import MyCard from '../components/card/MyCard';
+
 const About = () => {
+  const [sharedItem, setSharedItem] = useState(null);
+
+  const handleShare = (item) => {
+    setSharedItem(item);
+  };
+
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
+      {sharedItem && (
+        <CardMedia
+          component="img"
+          alt={sharedItem.title}
+          height="140"
+          image={`${POSTER}${sharedItem.poster_path}`}
+          title={sharedItem.title}
+        />
+      )}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          About
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        {sharedItem ? (
+          <Typography variant="body2" color="text.secondary">
+            {sharedItem.overview}
+          </Typography>
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            This is the about page.
+          </Typography>
+        )}
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small" onClick={() => handleShare(sharedItem)}>
+          Share
+        </Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
